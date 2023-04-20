@@ -19,7 +19,7 @@ namespace dbcrudgen {
 
         private:
             CppMYSQLProjectModel projectModel;
-            dbcrudgen::db::mysql::MYSQLDatabaseModel databaseModel;
+            dbcrudgen::db::generic::Database databaseModel;
 
             CppMYSQLDbTableModelCodeGen tableModelCodeGen{};
             CppMYSQLDbConnectorCodeGen connectorCodeGen{};
@@ -27,7 +27,7 @@ namespace dbcrudgen {
 
         public:
             explicit CppMYSQLProjectCreator(CppMYSQLProjectModel &projectModel,
-                                            dbcrudgen::db::mysql::MYSQLDatabaseModel &databaseModel)
+                                            dbcrudgen::db::generic::Database &databaseModel)
                     : CppProjectCreator{projectModel}, projectModel{projectModel}, databaseModel(databaseModel) {}
 
             /**

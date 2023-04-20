@@ -6,7 +6,7 @@
 #define DBCRUDGEN_CPP_CPPMYSQLDBTABLEMODELCODEGEN_H
 
 #include "CppMYSQLProjectCodeGen.h"
-#include "../../../databases/mysql/models/MYSQLDatabaseModel.h"
+#include "../../../databases/mysql/scaffolding/entities/Tables.h"
 
 namespace dbcrudgen {
     namespace orm {
@@ -19,12 +19,12 @@ namespace dbcrudgen {
             * @param databaseModel
             * @param generatedCodeDir
             */
-            void createDatabaseTableModel(CppMYSQLProjectModel projectModel, dbcrudgen::db::mysql::MYSQLDatabaseModel databaseModel,
+            void createDatabaseTableModel(CppMYSQLProjectModel projectModel, dbcrudgen::db::generic::Database& databaseModel,
                                           std::string generatedCodeDir) {
 
                 CppClassTableModelTemplate sourceTemplate;
 
-                std::vector<dbcrudgen::db::mysql::Tables> tables = databaseModel.getTables();
+                auto tables = databaseModel.getTables();
 
                 for (const auto &table : tables) {
 
@@ -51,7 +51,7 @@ namespace dbcrudgen {
                     content = StringUtils::replace(content, "${TABLE_NAME}", tableName);
 
 
-                    const auto tableColumnsMap = databaseModel.getTableColumns();
+                    const auto tableColumnsMap = databaseModel.getTables();
                     const auto tableColumnsIterator = tableColumnsMap.find(tableName);
 
                     if (tableColumnsIterator != tableColumnsMap.end()) {
